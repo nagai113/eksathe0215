@@ -1,0 +1,45 @@
+#biz_vektor_options h3			{ background-color:#666; color:#fff; border-left:5px solid #000;border-right:5px solid #000; padding:6px 15px;}
+#biz_vektor_options textarea	{ width:200px; }
+#biz_vektor_options .sectionBox	{ padding-top:50px; }
+#biz_vektor_options #topPage table#topPr	{border-left:1px dotted #666;margin-bottom:20px;}
+#biz_vektor_options #topPage table#topPr	th,
+#biz_vektor_options #topPage table#topPr	td	{ padding:5px 10px; border-right:1px dotted #666;  }
+#biz_vektor_options #topPage table#topPr	th	{ background-color:#e5e5e5;}
+#biz_vektor_options #topPage table#topPr	td dl { margin:0px; padding:0px; }
+
+#wpcontent select option {
+	padding-right: 5px;
+}
+.image-radio-option td {
+	padding-top: 15px;
+}
+.image-radio-option label {
+	display: block;
+	float: left;
+	margin: 0 30px 20px 2px;
+	position: relative;
+}
+.image-radio-option input {
+	margin: 0 0 10px;
+}
+.image-radio-option span {
+	display: block;
+	width: 136px;
+}
+.image-radio-option img {
+	margin: 0 0 0 -2px;
+}
+#link-color-example {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #dfdfdf;
+	margin: 0 7px 0 3px;
+	padding: 4px 14px;
+}
+
+body.rtl .image-radio-option label {
+	float: right;
+	margin: 0 2px 20px 30px;
+}
+

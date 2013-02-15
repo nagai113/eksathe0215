@@ -1,0 +1,11 @@
+/* テーマオプションページは inc ディレクトリ参照 */
+
+@import "style_BizVektor_adminHeader.css";
+
+#adminHeaderOuter	{ position: fixed; top: 0;left:0;background-color:#000;z-index:500; }
+#adminHeaderOuter #adminHeaderMenu ul	{ margin:0px;}
+#wpwrap	{ margin-top:40px;}
+#wpadminbar	{ top:35px;z-index:100; }
+
+/* メディアアップローダーで「添付ファイル投稿 URL」を非表示に */ 
+.button.urlpost	{ display:none !important; }
