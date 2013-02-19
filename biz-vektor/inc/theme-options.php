@@ -356,7 +356,7 @@ function biz_vektor_blogList()	{
 	if ($blogRss) {
 ?>
 	<div id="topBlog" class="infoList">
-	<h2>新着ブログ記事</h2>
+	<h2>eksathe&nbsp;Blog</h2>
 	<div class="rssBtn"><a href="<?php echo $blogRss ?>" id="blogRss">RSS</a></div>
 		<?php
 		$xml = simplexml_load_file($blogRss); 
