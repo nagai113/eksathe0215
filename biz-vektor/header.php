@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=320, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=1.0, ">
 <title><?php getHeadTitle(); ?></title>
 <meta name="description" content="<?php getHeadDescription(); ?>" />
-<meta name="keywords" content="<?php biz_vektor_getHeadKeywords(); //ãƒ†ãƒ¼ãƒžã‚ªãƒ—ã‚·ãƒ§ãƒ³ã§BizVektorç‰¹æœ‰ã®å€¤ï¼ˆå…±é€šã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ï¼‰ã‚’ä½¿ç”¨?>" />
+<meta name="keywords" content="<?php biz_vektor_getHeadKeywords(); //¥Æ©`¥Þ¥ª¥×¥·¥ç¥ó¤ÇBizVektorÌØÓÐ¤Î‚Ž£¨¹²Í¨¥­©`¥ï©`¥É£©¤òÊ¹ÓÃ?>" />
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:700|Lato:900|Anton' rel='stylesheet' type='text/css'>
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="start" href="<?php echo site_url(); ?>" title="ãƒ›ãƒ¼ãƒ " />
+<link rel="start" href="<?php echo site_url(); ?>" title="¥Û©`¥à" />
 <?php biz_vektor_ogp(); ?>
 <?php biz_vektor_theme_style(); ?>
 <?php biz_vektor_gMenuDivide(); ?>
@@ -38,7 +38,7 @@ window.onload = inFacebookPageCheck;
 ?>
 <?php if (is_front_page()) { ?>
 
-<?php // â–¼ã‚¹ãƒ©ã‚¤ãƒ‰ã‚·ãƒ§ãƒ¼ãŒã‚ã‚‹å ´åˆ ?>
+<?php // ¨‹¥¹¥é¥¤¥É¥·¥ç©`¤¬¤¢¤ëˆöºÏ ?>
 <?php if (biz_vektor_slideExist()) { ?>
 
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/js/FlexSlider/flexslider.css" type="text/css">
@@ -74,13 +74,6 @@ if ( is_user_logged_in() == TRUE ) { ?>
 <?php get_template_part('module_adminHeader'); ?>
 <?php } ?>
 
-<!-- [ #headerTop ] -->
-<div id="headerTop">
-<div class="innerBox">
-<div id="site-description"><?php bloginfo( 'description' ); ?></div>
-</div>
-</div><!-- [ /#headerTop ] -->
-
 <!-- [ #header ] -->
 <div id="header">
 <div id="headerInner" class="innerBox">
@@ -107,7 +100,7 @@ if ( is_user_logged_in() == TRUE ) { ?>
 <div id="gMenu" class="menuClose" onMouseOver="this.className='menuOpen'" onMouseOut="this.className='menuClose'">
 <div id="gMenuInner" class="innerBox">
 <h3 class="assistive-text"><span>MENU</span></h3>
-<div class="skip-link screen-reader-text"><a href="#content" title="ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é£›ã°ã™">ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é£›ã°ã™</a></div>
+<div class="skip-link screen-reader-text"><a href="#content" title="¥á¥Ë¥å©`¤òïw¤Ð¤¹">¥á¥Ë¥å©`¤òïw¤Ð¤¹</a></div>
 
 <?php wp_nav_menu( array(
  'theme_location' => 'Header',
@@ -132,25 +125,25 @@ if ( is_user_logged_in() == TRUE ) { ?>
 <div id="pageTitInner" >
 	
 	<?php if (get_post_type() === 'info' && (is_category() || is_single() || is_archive() || is_home())) { ?>
-	<div id="pageTit">ãŠçŸ¥ã‚‰ã›</div>
+	<div id="pageTit">¤ªÖª¤é¤»</div>
 	<?php } elseif ( is_attachment() ) { ?>
 	<div id="pageTit"><?php the_title(); ?></div>
-	<?php /* â–¼ã‚«ãƒ†ã‚´ãƒªãƒ¼ãƒšãƒ¼ã‚¸ || æŠ•ç¨¿è¨˜äº‹ || ã‚¢ãƒ¼ã‚«ã‚¤ãƒ– || æŠ•ç¨¿ã®ãƒˆãƒƒãƒ—ãƒšãƒ¼ã‚¸ */ ?>
+	<?php /* ¨‹¥«¥Æ¥´¥ê©`¥Ú©`¥¸ || Í¶¸åÓ›ÊÂ || ¥¢©`¥«¥¤¥Ö || Í¶¸å¤Î¥È¥Ã¥×¥Ú©`¥¸ */ ?>
 	<?php } else if (is_category() || is_single() || is_archive() || is_home()) { ?>
-	<div id="pageTit">ãƒ–ãƒ­ã‚°</div>
-	<?php /* â–¼å˜ä¸€ãƒšãƒ¼ã‚¸ */ ?>
+	<div id="pageTit">¥Ö¥í¥°</div>
+	<?php /* ¨‹…gÒ»¥Ú©`¥¸ */ ?>
 	<?php } else if (is_page()) { ?>
-	<h1 id="pageTit"><?php the_title(); ?> <?php edit_post_link('ç·¨é›†', '<span class="edit-link">ï¼ˆ', 'ï¼‰' ); ?></h1>
-	<?php /* â–¼ã‚¿ã‚°ã‚¢ãƒ¼ã‚«ã‚¤ãƒ– */ ?>
+	<h1 id="pageTit"><?php the_title(); ?> <?php edit_post_link('¾Ž¼¯', '<span class="edit-link">£¨', '£©' ); ?></h1>
+	<?php /* ¨‹¥¿¥°¥¢©`¥«¥¤¥Ö */ ?>
 	<?php } else if (is_tag()) { ?>
-	<h1 id="pageTit">ã‚¿ã‚°åˆ¥ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ï¼š<?php single_tag_title();?></h1>
-	<?php /* â–¼æ¤œç´¢çµæžœ */ ?>
+	<h1 id="pageTit">¥¿¥°„e¥¢©`¥«¥¤¥Ö£º<?php single_tag_title();?></h1>
+	<?php /* ¨‹—ÊË÷½Y¹û */ ?>
 	<?php } else if (is_search()) { ?>
-	<h1 id="pageTit">ã€Ž<?php echo get_search_query(); ?>ã€ã®æ¤œç´¢çµæžœ</h1>
-	<?php /* â–¼ãã‚Œä»¥å¤– */ ?>
+	<h1 id="pageTit">¡º<?php echo get_search_query(); ?>¡»¤Î—ÊË÷½Y¹û</h1>
+	<?php /* ¨‹¤½¤ìÒÔÍâ */ ?>
 	<?php } else { ?>
-	<h1 id="pageTit">ãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“</h1>
-	<?php /* â–²ãã‚Œä»¥å¤– */ ?>
+	<h1 id="pageTit">¥Ú©`¥¸¤¬ÒŠ¤Ä¤«¤ê¤Þ¤»¤ó</h1>
+	<?php /* ¡ø¤½¤ìÒÔÍâ */ ?>
 <?php } ?>
 </div><!-- [ /#pageTitInner ] -->
 </div>
