@@ -12,11 +12,7 @@ $linkUrl = get_permalink();
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </li>
 <li class="sb_google"><g:plusone size="medium"></g:plusone></li>
-<li id="sb_hatena"><a href="http://b.hatena.ne.jp/entry65+325/<?php echo $linkUrl; ?>" class="hatena-bookmark-button" data-hatena-bookmark-title="<?php getHeadTitle(); ?>" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></li>
 <li class="sb_facebook"><div class="fb-like" data-href="<?php echo $linkUrl; ?>" data-send="true" data-layout="button_count" data-show-faces="false"></div></li>
-<li class="sb_mixi">
-<div data-plugins-type="mixi-favorite" data-service-key="<?php echo mixiKey() ?>" data-size="medium" data-href="<?php echo $linkUrl; ?>" data-show-faces="false" data-show-count="true" data-show-comment="true" data-width=""></div><script type="text/javascript">(function(d) {var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true;s.src = '//static.mixi.jp/js/plugins.js#lang=ja';d.getElementsByTagName('head')[0].appendChild(s);})(document);</script>
-</li>
 </ul>
 
 </div>
