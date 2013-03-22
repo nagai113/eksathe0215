@@ -69,9 +69,9 @@ if ( is_user_logged_in() == TRUE ) { ?>
 <div id="wrap">
 <!-- [ #headerTop ] -->
 <div id="headerTop">
-<div class="innerBox">
+<!--<div class="innerBox">
 <div id="site-description"><?php bloginfo( 'description' ); ?></div>
-</div>
+</div>-->
 </div><!-- [ /#headerTop ] -->
 
 <!-- [ #header ] -->
