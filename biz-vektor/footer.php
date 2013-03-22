@@ -49,7 +49,7 @@
 	<!-- [ #siteBottom ] -->
 	<div id="siteBottom">
 	<div id="siteBottomInner" class="innerBox">
-	<?php biz_vektor_footerCopyRight(); ?>
+		Copyright © ek sathe All Rights Reserved.
 	</div>
 	</div>
 	<!-- [ /#siteBottom ] -->
