@@ -5,7 +5,6 @@
 	<!-- [ #content ] -->
 	<div id="content">
 	<h2><?php printf( get_the_date('Y'."年".'M') ); ?></h2>
-
 	<div class="infoList">
 	<?php
 	$options = biz_vektor_get_theme_options();
@@ -14,8 +13,8 @@
 	} else {
 		get_template_part('module_loop_blog2');
 	} ?>
-	</div>
-	<?php biz_vektor_content_nav( 'nav-below' ); ?>
+	</div><!-- [ /.infoList ] -->
+	<?php pagination($additional_loop->max_num_pages); ?>
 	</div>
 	<!-- [ /#content ] -->
 

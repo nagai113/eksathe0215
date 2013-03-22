@@ -9,7 +9,7 @@
 <!-- [ #post- ] -->
 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<h1 class="entryPostTitle"><?php the_title(); ?> <?php edit_post_link('編集', '<span class="edit-link">（', '）' ); ?></h1>
-	<div class="entry-meta">投稿日：<?php the_time('Y.m.d'); ?> | カテゴリー：<?php the_category(', ') ?></div><!-- .entry-meta -->
+	<div class="entry-meta">投稿日：<?php echo esc_html( get_the_date() ); ?> | カテゴリー：<?php the_category(', ') ?></div><!-- .entry-meta -->
 
 	<div class="entry-content post-content">
 		<?php the_content(); ?>
@@ -31,7 +31,7 @@
 <?php
 if ( is_user_logged_in() == TRUE ) {　?>
 <div class="adminEdit">
-	<span class="mBtn"><?php edit_post_link('編集', '<span class="edit-link">', '</span>' ); ?></span>
+	<span class="linkBtn linkBtnS linkBtnAdmin"><?php edit_post_link('編集'); ?></span>
 </div>
 <?php } ?>
 

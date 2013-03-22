@@ -2,8 +2,9 @@
 
 <!-- [ #container ] -->
 <div id="container" class="innerBox">
-	<!-- [ #content ] -->
-	<div id="content">
+<!-- [ #content ] -->
+<div id="content">
+
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 <div id="post-<?php the_ID(); ?>" class="entry-content">
 	<?php the_content(); ?>
@@ -12,7 +13,7 @@
 <?php
 if ( is_user_logged_in() == TRUE ) {　?>
 <div class="adminEdit">
-<span class="mBtn"><?php edit_post_link('編集', '<span class="edit-link">', '</span>' ); ?></span>
+<span class="linkBtn linkBtnS linkBtnAdmin"><?php edit_post_link('編集'); ?></span>
 </div>
 <?php } ?>
 <?php endwhile; ?>
@@ -60,7 +61,7 @@ if ( is_user_logged_in() == TRUE ) {　?>
 	if ($post_id) {
 		$children = wp_list_pages("title_li=&child_of=".$post_id."&echo=0");
 		if ($children) { ?>
-		<div class="localSection sideWidget">
+		<div class="localSection sideWidget pageListSection">
 		<h3 class="localHead"><a href="<?php echo get_permalink($post_id); ?>"><?php echo get_the_title($post_id); ?></a></h3>
 		<ul class="localNavi">
 		<?php echo $children; ?>
@@ -69,9 +70,11 @@ if ( is_user_logged_in() == TRUE ) {　?>
 		<?php } else { ?>
 		<?php } ?>
 <?php } ?>
-	<div class="localSection">
-	<?php get_sidebar(); ?>
-	</div>
+	<?php if(get_sidebar()) { ?>
+		<div class="localSection">
+		<?php get_sidebar(); ?>
+		</div>
+	<?php } ?>
 </div>
 <!-- [ /#sideTower ] -->
 </div>

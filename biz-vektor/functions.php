@@ -9,17 +9,27 @@
 /*-------------------------------------------*/
 /*	カスタムヘッダー
 /*-------------------------------------------*/
-/*	テーマオプションを呼び出す
+/*	カスタム背景
+/*-------------------------------------------*/
+/*	テーマオプションを読み込む
+/*-------------------------------------------*/
+/*	Calmly用セッティングを読み込む
+/*-------------------------------------------*/
+/*	テーマカスタマイザーセッティング
 /*-------------------------------------------*/
 /*	管理画面_スタイルを追加
+/*-------------------------------------------*/
+/*	管理画面_投稿ステータスをbodyのclassに追加
 /*-------------------------------------------*/
 /*	管理画面_ビジュアルエディタでのcss指定
 /*-------------------------------------------*/
 /*	管理画面_オリジナル管理バーを追加
 /*-------------------------------------------*/
+/*	管理画面_ダッシュボードから余分な項目を削除
+/*-------------------------------------------*/
 /*	管理画面_アイキャッチが使えるように
 /*-------------------------------------------*/
-/*	管理画面_ダッシュボードから余分な項目を削除
+/*	管理画面_keywordのカスタムフィールドを追加
 /*-------------------------------------------*/
 /*	管理画面_固定ページのカスタマイズ
 /*-------------------------------------------*/
@@ -27,21 +37,23 @@
 /*-------------------------------------------*/
 /*	カスタム投稿タイプ_お知らせの追加
 /*-------------------------------------------*/
-/*	パンくずリスト
-/*-------------------------------------------*/
-/*	カスタム分類でaタグ無しで出力する
-/*-------------------------------------------*/
-/*	title 生成
+/*	カスタム分類名をaタグ無しで出力する
 /*-------------------------------------------*/
 /*	description 生成
 /*-------------------------------------------*/
-/*	keyword 生成
+/*	ナビゲーションメニューの英語併記
 /*-------------------------------------------*/
 /*	抜粋の後につく [...] を変換
 /*-------------------------------------------*/
 /*	抜粋のpタグ自動挿入解除
 /*-------------------------------------------*/
-/*	年別アーカイブリストの“年”をaタグの中に置換
+/*	年別アーカイブリストの“年”を</a>の中に置換
+/*-------------------------------------------*/
+/*	カテゴリー件数を</a>の中に置換
+/*-------------------------------------------*/
+/*	TinyMCEでiframeタグ（GoogleMapなど）の自動消去禁止指定
+/*-------------------------------------------*/
+/*	metaタグからwordpressの情報を削除
 /*-------------------------------------------*/
 /*	画像挿入時のwidthとheight指定削除
 /*	（スマホ表示の際に画像サイズ自動調整がうまくいかない為）
@@ -50,10 +62,11 @@
 /*-------------------------------------------*/
 /*	Archive page link ( don't erase )
 /*-------------------------------------------*/
+/*	wp_head が吐き出す余分な項目を削除
+/*-------------------------------------------*/
 /*	Comment out short code
 /*-------------------------------------------*/
 
-// ▼TinyMCEでGoogleMap (iframeタグの消去禁止指定）
 // ▼管理バー非表示
 // ▼メニューに「すべての設定」項目を加える
 
@@ -78,7 +91,7 @@ register_nav_menus( array( 'FooterSiteMap' => 'Footer SiteMap', ) );
 /*-------------------------------------------*/
 function biz_vektor_widgets_init() {
 	register_sidebar( array(
-		'name' => __( 'サイドバーウィジェット（トップのみ）', 'biz_vektor' ),
+		'name' => __( 'サイドバー（トップのみ）', 'biz_vektor' ),
 		'id' => 'top-side-widget-area',
 		'description' => __( 'トップページにのみ表示されるサイドバーウィジェットです。ドラッグ＆ドロップで必要なものだけ入れてください。バナーやブログパーツなどは、『テキスト』ウィジェットを使用して、ソースコードを張り付けられます。サイドバーウィジェット（共通）の上に表示されます。', 'biz_vektor' ),
 		'before_widget' => '<div class="sideWidget">',
@@ -88,7 +101,7 @@ function biz_vektor_widgets_init() {
 	) );
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array(
-		'name' => __( 'サイドバーウィジェット（共通・上）', 'biz_vektor' ),
+		'name' => __( 'サイドバー（共通・上）', 'biz_vektor' ),
 		'id' => 'primary-widget-area',
 		'description' => __( 'サイドバーに表示するウィジェットです。facebook,twitterバナーの上に表示されます。', 'biz_vektor' ),
 		'before_widget' => '<div class="sideWidget">',
@@ -97,9 +110,18 @@ function biz_vektor_widgets_init() {
 		'after_title' => '</h3>',
 	) );
 	register_sidebar( array(
-		'name' => __( 'サイドバーウィジェット（共通・下）', 'biz_vektor' ),
+		'name' => __( 'サイドバー（共通・下）', 'biz_vektor' ),
 		'id' => 'secondary-widget-area',
 		'description' => __( 'サイドバーに表示するウィジェットです。facebook,twitterバナーの下に表示されます。', 'biz_vektor' ),
+		'before_widget' => '<div class="sideWidget">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="localHead">',
+		'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'サイドバー（投稿・問い合わせバナー上）', 'biz_vektor' ),
+		'id' => 'blog-first-widget-area',
+		'description' => __( '投稿コンテンツのページにのみ表示されるウィジェットです。問い合わせバナーの上に表示されます。', 'biz_vektor' ),
 		'before_widget' => '<div class="sideWidget">',
 		'after_widget' => '</div>',
 		'before_title' => '<h3 class="localHead">',
@@ -122,45 +144,84 @@ define( 'NO_HEADER_TEXT', true );
 define('HEADER_IMAGE', '%s/images/headers/bussines_desk_02.jpg');
 define('HEADER_IMAGE_WIDTH', 950);
 define('HEADER_IMAGE_HEIGHT', 250);
-	register_default_headers( array(
-		'bussines_desk_02' => array(
-			'url' => '%s/images/headers/bussines_desk_02.jpg',
-			'thumbnail_url' => '%s/images/headers/bussines_desk_02-thumbnail.jpg',
-			'description' => 'Bussines desk01'
-		),
-		'bussines_desk_01' => array(
-			'url' => '%s/images/headers/bussines_desk_01.jpg',
-			'thumbnail_url' => '%s/images/headers/bussines_desk_01-thumbnail.jpg',
-			'description' => 'Bussines desk01'
-		),
-		'autumn-leaves' => array(
-			'url' => '%s/images/headers/autumn-leaves.jpg',
-			'thumbnail_url' => '%s/images/headers/autumn-leaves-thumbnail.jpg',
-			'description' => 'autumn-leaves'
-		),
-		'johnny_01' => array(
-			'url' => '%s/images/headers/johnny_01.jpg',
-			'thumbnail_url' => '%s/images/headers/johnny_01-thumbnail.jpg',
-			'description' => 'Johnny'
-		),
-	) );
+register_default_headers( array(
+	'bussines_desk_02' => array(
+		'url' => '%s/images/headers/bussines_desk_02.jpg',
+		'thumbnail_url' => '%s/images/headers/bussines_desk_02-thumbnail.jpg',
+		'description' => 'Bussines desk01'
+	),
+	'bussines_desk_01' => array(
+		'url' => '%s/images/headers/bussines_desk_01.jpg',
+		'thumbnail_url' => '%s/images/headers/bussines_desk_01-thumbnail.jpg',
+		'description' => 'Bussines desk01'
+	),
+	'autumn-leaves' => array(
+		'url' => '%s/images/headers/autumn-leaves.jpg',
+		'thumbnail_url' => '%s/images/headers/autumn-leaves-thumbnail.jpg',
+		'description' => 'autumn-leaves'
+	),
+	'johnny_01' => array(
+		'url' => '%s/images/headers/johnny_01.jpg',
+		'thumbnail_url' => '%s/images/headers/johnny_01-thumbnail.jpg',
+		'description' => 'Johnny'
+	),
+) );
 add_custom_image_header('admin_header_style', ''); 
 if ( ! function_exists( 'admin_header_style' ) ) ://wp_headで<head>にCSSを追加。無いとエラーが出るので削除不可
 function admin_header_style() { }
 endif;
 
 /*-------------------------------------------*/
-/*	テーマオプションを呼び出す
+/*	カスタム背景
+/*-------------------------------------------*/
+add_custom_background();
+
+// add_theme_support( 'custom_background' );
+
+
+/*-------------------------------------------*/
+/*	テーマオプションを読み込む
 /*-------------------------------------------*/
 	require( dirname( __FILE__ ) . '/inc/theme-options.php' );
+
+/*-------------------------------------------*/
+/*	Calmly用セッティングを読み込む
+/*-------------------------------------------*/
+	require( dirname( __FILE__ ) . '/bizvektor_themes/002/002_custom.php' );
+
+/*-------------------------------------------*/
+/*	テーマカスタマイザーセッティング
+/*-------------------------------------------*/
+	require( dirname( __FILE__ ) . '/inc/theme-customizer.php' );
 
 /*-------------------------------------------*/
 /*	管理画面_スタイルを追加
 /*-------------------------------------------*/
 function bizVektor_admin_css(){
-	echo '<link rel="stylesheet" type="text/css" href="'.get_template_directory_uri().'/style_BizVektor_admin.css" />';
+	// echo '<link rel="stylesheet" type="text/css" href="'.get_template_directory_uri().'/style_BizVektor_admin.css" />';
+	$adminCssPath = get_template_directory_uri().'/style_BizVektor_admin.css';
+	wp_enqueue_style( 'theme', $adminCssPath , false, '2012-06-24');
 }
 add_action('admin_head', 'bizVektor_admin_css', 11);
+
+/*-------------------------------------------*/
+/*	管理画面_投稿ステータスをbodyのclassに追加
+/*-------------------------------------------*/
+function bizVektor_postStatus(){
+		$classes = get_post_status() // 投稿の状態を取得; ?>
+		<script type="text/javascript" charset="utf-8">
+		function postStatusColor(){
+			// 現状のクラス名を取得して投稿ステータスを足す
+			var newClass = document.getElementsByTagName("body")[0].className + " <?php echo $classes ?>";
+			// 現状のクラス名を置き換える
+			document.getElementsByTagName("body")[0].setAttribute("class",newClass);
+		}
+		window.onload = postStatusColor;
+		</script>
+<?php
+}
+add_action('admin_head-post.php', 'bizVektor_postStatus', 12);
+add_action('admin_head-post-new.php', 'bizVektor_postStatus', 12);
 
 /*-------------------------------------------*/
 /*	管理画面_ビジュアルエディタでのcss指定
@@ -175,24 +236,20 @@ function original_header_menu_output() {
 }
 add_action('admin_notices','original_header_menu_output');
 
-// ▼管理バー非表示
-add_filter( 'show_admin_bar', '__return_false' );
-// ▲管理バー非表示
-
 
 /*-------------------------------------------*/
 /*	管理画面_ダッシュボードから余分な項目を削除
 /*-------------------------------------------*/
 function remove_dashboard_widgets() {
   global $wp_meta_boxes;
-  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);//被リンク
-//  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);//現在の状況
-  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);//プラグイン
- // unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']);//最近のコメント
-//  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);//クイック投稿
-//  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']);//最近の下書き
-  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);//WordPress開発ブログ
-  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);//WordPressフォーラム  
+  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);		//被リンク
+//  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);		//現在の状況
+//  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);			//プラグイン
+//	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']);	//最近のコメント
+//  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);		//クイック投稿
+//  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']);		//最近の下書き
+//  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);			//WordPress開発ブログ
+//  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);			//WordPressフォーラム  
 }
 add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
 
@@ -209,7 +266,50 @@ add_action( 'load-index.php', 'hide_welcome_panel' );
 /*	管理画面_アイキャッチが使えるように
 /*-------------------------------------------*/
 add_theme_support( 'post-thumbnails' );
-set_post_thumbnail_size( 150, 150, true );
+set_post_thumbnail_size( 200, 200, true );
+
+/*-------------------------------------------*/
+/*	管理画面_keywordのカスタムフィールドを追加
+/*-------------------------------------------*/
+add_action('admin_menu', 'add_custom_field_metaKeyword');
+add_action('save_post', 'save_custom_field_metaKeyword');
+
+function add_custom_field_metaKeyword(){
+  if(function_exists('add_custom_field_metaKeyword')){
+    add_meta_box('div1', 'キーワード', 'insert_custom_field_metaKeyword', 'page', 'normal', 'high');
+    add_meta_box('div1', 'キーワード', 'insert_custom_field_metaKeyword', 'post', 'normal', 'high');
+    add_meta_box('div1', 'キーワード', 'insert_custom_field_metaKeyword', 'info', 'normal', 'high');
+  }
+}
+
+function insert_custom_field_metaKeyword(){
+  global $post;
+  echo '<input type="hidden" name="noncename_custom_field_metaKeyword" id="noncename_custom_field_metaKeyword" value="'.wp_create_nonce(plugin_basename(__FILE__)).'" />';
+  echo '<label class="hidden" for="metaKeyword">キーワード</label><input type="text" name="metaKeyword" size="50" value="'.get_post_meta($post->ID, 'metaKeyword', true).'" />';
+  echo '<p>このページで個別に設定するキーワードを , 区切りで入力して下さい（任意）<br />';
+  echo '※サイト全体に共通して設定するキーワードは<a href="'.get_admin_url().'/themes.php?page=theme_options#seoSetting" target="_blank">テーマオプション</a>から設定出来ます。</p>';
+}
+
+function save_custom_field_metaKeyword($post_id){
+  if(!wp_verify_nonce($_POST['noncename_custom_field_metaKeyword'], plugin_basename(__FILE__))){
+    return $post_id;
+  }
+  if('page' == $_POST['post_type']){
+    if(!current_user_can('edit_page', $post_id)) return $post_id;
+  }else{
+    if(!current_user_can('edit_post', $post_id)) return $post_id;
+  }
+
+  $data = $_POST['metaKeyword'];
+
+  if(get_post_meta($post_id, 'metaKeyword') == ""){
+    add_post_meta($post_id, 'metaKeyword', $data, true);
+  }elseif($data != get_post_meta($post_id, 'metaKeyword', true)){
+    update_post_meta($post_id, 'metaKeyword', $data);
+  }elseif($data == ""){
+    delete_post_meta($post_id, 'metaKeyword', get_post_meta($post_id, 'metaKeyword', true));
+  }
+}
 
 /*-------------------------------------------*/
 /*	管理画面_固定ページのカスタマイズ
@@ -217,7 +317,7 @@ set_post_thumbnail_size( 150, 150, true );
 add_post_type_support( 'page', 'excerpt' ); // 抜粋欄を追加
 
 function remove_default_page_screen_metaboxes() {
-	remove_meta_box( 'postcustom','page','normal' );		// カスタムフィールド
+//	remove_meta_box( 'postcustom','page','normal' );		// カスタムフィールド
 //	remove_meta_box( 'postexcerpt','page','normal' );		// 抜粋
 	remove_meta_box( 'commentstatusdiv','page','normal' );	// ディスカッション
 	remove_meta_box( 'commentsdiv','page','normal' );		// コメント
@@ -232,12 +332,12 @@ add_action('admin_menu','remove_default_page_screen_metaboxes');
 /*	管理画面_投稿のカスタマイズ
 /*-------------------------------------------*/
 function remove_default_post_screen_metaboxes() {
-	remove_meta_box( 'postcustom','post','normal' );			// カスタムフィールド
+//	remove_meta_box( 'postcustom','post','normal' );			// カスタムフィールド
 //	remove_meta_box( 'postexcerpt','post','normal' );			// 抜粋
 //	remove_meta_box( 'commentstatusdiv','post','normal' );		// コメント
 //	remove_meta_box( 'trackbacksdiv','post','normal' );			// トラックバック
 //	remove_meta_box( 'slugdiv','post','normal' );				// スラッグ
-	remove_meta_box( 'authordiv','post','normal' );				// 作成者
+//	remove_meta_box( 'authordiv','post','normal' );				// 作成者
  }
  add_action('admin_menu','remove_default_post_screen_metaboxes');
  
@@ -288,8 +388,10 @@ function my_rewrite( $wp_rewrite ){
      endforeach;
 }
 
-/*		カスタム分類のパーマリンクを“/カスタム投稿名/カスタム分類名/項目”にする。
+/*		カスタム分類のパーマリンクを“/カスタム投稿名/カスタム分類名/項目”にする。 
+		ページングが正しく動作しない為 0.6.1.1で停止
 /*-------------------------------------------*/
+/*
 add_filter( 'term_link', 'my_term_link' ,10,3);
 function my_term_link( $termlink, $term, $taxonomy){
     $t=get_taxonomy($taxonomy);
@@ -303,7 +405,7 @@ function my_term_link( $termlink, $term, $taxonomy){
 	}
     return $termlink;
 }
-
+*/
 /*		カスタム投稿タイプのアーカイブ出力
 /*-------------------------------------------*/
 global $my_archives_post_type;
@@ -341,78 +443,7 @@ add_filter('pre_get_posts', 'custom_post_rss_set');
 */
 
 /*-------------------------------------------*/
-/*	パンくずリスト
-/*-------------------------------------------*/
-function get_panList(){
-	global $wp_query;
-	if ( !is_front_page() ){
-		echo '<ul>';
-		echo '<li><a href="'. home_url() .'">HOME</a></li>';
-		// ▼投稿ページをブログに指定された場合
-		if ( is_404() ){
-			echo "<li> &raquo; ページが見つかりません</li>";
-		// ▼投稿ページをブログに指定された場合
-		} elseif ( is_home() ){
-			echo '<li> &raquo; ブログ</li>';
-		// ▼お知らせ
-		} elseif (get_post_type() == 'info') {
-			echo '<li> &raquo; お知らせ</li>';
-			if (is_single()) {
-			$taxo_catelist = get_the_term_list( $post->ID, 'info-cat', '', ',', '' );
-				echo '<li> &raquo; '.$taxo_catelist.'</li>';
-				echo '<li> &raquo; '.the_title('','', FALSE).'</li>';
-			} else if (is_tax('info-cat')){
-				echo '<li> &raquo; '.single_cat_title('','', FALSE).'</li>';
-			} else if (is_archive()) {
-				echo '<li> &raquo; '.get_the_time('Y').'年</li>';
-			}
-		// ▼固定ページ
-		} elseif ( is_page() ) {
-			$post = $wp_query->get_queried_object();
-			if ( $post->post_parent == 0 ){
-				echo "<li> &raquo; ".the_title('','', FALSE)."</li>";
-			} else {
-				$title = the_title('','', FALSE);
-				$ancestors = array_reverse( get_post_ancestors( $post->ID ) );
-				array_push($ancestors, $post->ID);
-
-				foreach ( $ancestors as $ancestor ){
-					if( $ancestor != end($ancestors) ){
-						echo '<li> &raquo; <a href="'. get_permalink($ancestor) .'">'. strip_tags( apply_filters( 'single_post_title', get_the_title( $ancestor ) ) ) .'</a></li>';
-					} else {
-						echo '<li> &raquo; '. strip_tags( apply_filters( 'single_post_title', get_the_title( $ancestor ) ) ) .'</li>';
-					}
-				}
-			}
-		} else if ( is_category() ) {
-			echo '<li> &raquo; ブログ</li>';
-			$catTitle = single_cat_title( "", false );
-			$cat = get_cat_ID( $catTitle );
-			echo "<li> &raquo; ". get_category_parents( $cat, TRUE, "" ) ."</li>";
-		} elseif ( is_tag() ) {
-			echo '<li> &raquo; ブログ</li>';
-			$tagTitle = single_tag_title( "", false );
-			echo "<li> &raquo; ". $tagTitle ."</li>";
-		} elseif ( is_archive() && !is_category() ) {
-			echo '<li> &raquo; ブログ</li>';
-			echo "<li> &raquo; ".get_the_date('Y'."年".'M')."</li>";
-		} elseif ( is_search() ) {
-			echo "<li> &raquo; 検索結果</li>";
-		} elseif ( is_attachment() ) {
-			echo '<li> &raquo; '.the_title('','', FALSE).'</li>';
-		} elseif ( is_single() ) {
-			$category = get_the_category();
-			$category_id = get_cat_ID( $category[0]->cat_name );
-			echo '<li> &raquo; ブログ</li>';
-			echo '<li> &raquo; '. get_category_parents( $category_id, TRUE, " &raquo; " );
-			echo the_title('','', FALSE) ."</li>";
-		echo "</ul>";
-		}
-	}
-}
-
-/*-------------------------------------------*/
-/*	カスタム分類でaタグ無しで出力する
+/*	カスタム分類名をaタグ無しで出力する
 /*-------------------------------------------*/
 function get_the_term_list_nolink( $id = 0, $taxonomy, $before = '', $sep = '', $after = '' ) {
     $terms = get_the_terms( $id, $taxonomy );
@@ -429,65 +460,7 @@ function get_the_term_list_nolink( $id = 0, $taxonomy, $before = '', $sep = '', 
     }
     return $before . join( $sep, $term_names ) . $after;
 }
-/*-------------------------------------------*/
-/*	title 生成
-/*-------------------------------------------*/
-function getHeadTitle() {
-	global $wp_query;
-	$post = $wp_query->get_queried_object();
-	if (is_home() || is_page('home') || is_front_page()) {
-		$headTitle = get_bloginfo('name')." | ".get_bloginfo( 'description' );
-	// ▼固定ページ
-	} else if (is_page()) {
-		// ▼サブページの場合
-		if ( $post->post_parent ) {
-			if($post->ancestors){
-				foreach($post->ancestors as $post_anc_id){
-					$post_id = $post_anc_id;
-				}
-			} else {
-				$post_id = $post->ID;
-			}
-			$headTitle = get_the_title()." | ".get_the_title($post_id)." | ".get_bloginfo('name');
-		// ▼サブページではない場合
-		} else {
-			$headTitle = get_the_title()." | ".get_bloginfo('name');
-		}
-	// ▼お知らせ
-	} else if (get_post_type() === 'info' || taxonomy_exists('info-cat')) { // タクソノミーの指定は投稿が空のタクソノミーページでも正しく読み込む為に必要。
-		// ▼お知らせ
-		if (is_single()) {
-			$taxo_catelist = get_the_term_list_nolink( $post->ID, 'info-cat', '', ',', '' );
-			$headTitle = get_the_title()." | ".$taxo_catelist." | ".get_bloginfo('name');
-		// ▼お知らせカテゴリー
-		} else if (is_tax()){
-			$headTitle = single_cat_title()." | お知らせ | ".get_bloginfo('name');
-		// ▼お知らせアーカイブ
-		} else if (is_archive()) {
-			$headTitle = get_the_date('Y')."年 | お知らせ | ".get_bloginfo('name');
-		}
-	// ▼投稿記事
-	} else if (is_single()) {
-		$category = get_the_category();
-		$headTitle = get_the_title()." | ".$category[0]->cat_name." | ".get_bloginfo('name');
-	// ▼投稿カテゴリーページ
-	} else if (is_category()) {
-		$headTitle = single_cat_title()." | ブログ | ".get_bloginfo('name');
-	// ▼タグアーカイブ */
-	} else if (is_tag()) {
-		$headTitle = single_tag_title()." | ".get_bloginfo('name');
-	// ▼投稿アーカイブページ
-	} else if (is_archive()) {
-		$headTitle = get_the_date('Y'."年".'M')." | ブログ | ".get_bloginfo('name');
-	// ▼検索結果
-	} else if (is_search()) {
-		$headTitle = get_search_query()."の検索結果 | ".get_bloginfo('name');
-	// ▼それ以外
-	} else {
-		$headTitle = get_bloginfo('name');
-	}
-    echo $headTitle;
-}
+
 /*-------------------------------------------*/
 /*	description 生成
 /*-------------------------------------------*/
@@ -498,7 +471,7 @@ function getHeadDescription() {
 	if (is_home() || is_page('home') || is_front_page()) {
 		$metadescription = get_bloginfo( 'description' );
 	// ▼カテゴリーページ
-	} else if (is_category()) {
+	} else if (is_category() || is_tax()) {
 		$metadescription = $post->category_description;
 		if ( ! $metadescription ) {
 			$metadescription = single_cat_title()."について。".get_bloginfo('description');
@@ -528,82 +501,6 @@ function getHeadDescription() {
 	}
     echo $metadescription;
 }
-/*-------------------------------------------*/
-/*	keyword 設定
-/*-------------------------------------------*/
-add_action('admin_menu', 'add_custom_field_1');
-add_action('save_post', 'save_custom_field_1');
-
-function add_custom_field_1(){
-  if(function_exists('add_custom_field_1')){
-    add_meta_box('div1', 'キーワード', 'insert_custom_field_1', 'page', 'normal', 'high');
-    add_meta_box('div1', 'キーワード', 'insert_custom_field_1', 'post', 'normal', 'high');
-    add_meta_box('div1', 'キーワード', 'insert_custom_field_1', 'info', 'normal', 'high');
-  }
-}
-
-function insert_custom_field_1(){
-  global $post;
-  echo '<input type="hidden" name="noncename_custom_field_1" id="noncename_custom_field_1" value="'.wp_create_nonce(plugin_basename(__FILE__)).'" />';
-  echo '<label class="hidden" for="metaKeyword">キーワード</label><input type="text" name="metaKeyword" size="50" value="'.get_post_meta($post->ID, 'metaKeyword', true).'" />';
-  echo '<p>このページで個別に設定するキーワードを , 区切りで入力して下さい（任意）<br />';
-  echo '※サイト全体に共通して設定するキーワードは<a href="'.site_url().'/wp-admin/themes.php?page=theme_options#seoSetting" target="_blank">テーマオプション</a>から設定出来ます。</p>';
-}
-
-function save_custom_field_1($post_id){
-  if(!wp_verify_nonce($_POST['noncename_custom_field_1'], plugin_basename(__FILE__))){
-    return $post_id;
-  }
-  if('page' == $_POST['post_type']){
-    if(!current_user_can('edit_page', $post_id)) return $post_id;
-  }else{
-    if(!current_user_can('edit_post', $post_id)) return $post_id;
-  }
-
-  $data = $_POST['metaKeyword'];
-
-  if(get_post_meta($post_id, 'metaKeyword') == ""){
-    add_post_meta($post_id, 'metaKeyword', $data, true);
-  }elseif($data != get_post_meta($post_id, 'metaKeyword', true)){
-    update_post_meta($post_id, 'metaKeyword', $data);
-  }elseif($data == ""){
-    delete_post_meta($post_id, 'metaKeyword', get_post_meta($post_id, 'metaKeyword', true));
-  }
-}
-
-/*-------------------------------------------*/
-/*	抜粋の後につく [...] を変換
-/*-------------------------------------------*/
-function change_excerpt_more($post) {
-    return ' ...';    
-}    
-add_filter('excerpt_more', 'change_excerpt_more');
-
-/*-------------------------------------------*/
-/*	抜粋のpタグ自動挿入解除
-/*-------------------------------------------*/
-remove_filter('the_excerpt', 'wpautop');
-
-/*-------------------------------------------*/
-/*	年別アーカイブリストの“年”をaタグの中に置換
-/*-------------------------------------------*/
-function my_archives_link($html){
-  return preg_replace('@</a>(.+?)</li>@', '\1</a></li>', $html);
-}
-add_filter('get_archives_link', 'my_archives_link');
-
-// ▼TinyMCEでGoogleMap (iframeタグの消去禁止指定）
-function add_iframe($initArray) {
-$initArray['extended_valid_elements'] = "iframe[id|class|title|style|align|frameborder|height|longdesc|marginheight|marginwidth|name|scrolling|src|width]";
-return $initArray;
-}
-add_filter('tiny_mce_before_init', 'add_iframe');
-// ▲TinyMCEでGoogleMap (iframeタグの消去禁止指定
-
-// ▼metaタグからwordpressの情報を削除（旧バージョンの利用がわかるとセキュリティの脆弱性を突かれやすい）
-remove_action('wp_head', 'wp_generator');
-// ▲metaタグからwordpressの情報を削除
-
 /*-------------------------------------------*/
 /*	ナビゲーションメニューの英語併記
 /*-------------------------------------------*/
@@ -644,9 +541,58 @@ class description_walker extends Walker_Nav_Menu {
     }
 }
 /*-------------------------------------------*/
+/*	抜粋の後につく [...] を変換
+/*-------------------------------------------*/
+//	あれ、こんなフィルター無いっぽい。特定のテーマが独自につけてたフィルターかも。要確認
+function change_excerpt_more($post) {
+    return ' ...';    
+}    
+add_filter('excerpt_more', 'change_excerpt_more');
+
+/*-------------------------------------------*/
+/*	抜粋のpタグ自動挿入解除
+/*-------------------------------------------*/
+remove_filter('the_excerpt', 'wpautop');
+
+/*-------------------------------------------*/
+/*	年別アーカイブリストの“年”を</a>の中に置換
+/*-------------------------------------------*/
+function my_archives_link($html){
+  return preg_replace('@</a>(.+?)</li>@', '\1</a></li>', $html);
+}
+add_filter('get_archives_link', 'my_archives_link');
+
+/*-------------------------------------------*/
+/*	カテゴリー件数を</a>の中に置換
+/*-------------------------------------------*/
+function my_list_categories( $output, $args ) {
+	$output = preg_replace('/<\/a>\s*\((\d+)\)/',' ($1)</a>',$output);
+	return $output;
+}
+add_filter( 'wp_list_categories', 'my_list_categories', 10, 2 );
+
+
+/*-------------------------------------------*/
+/*	TinyMCEでiframeタグ（GoogleMapなど）の自動消去禁止指定
+/*-------------------------------------------*/
+function add_iframe($initArray) {
+$initArray['extended_valid_elements'] = "iframe[id|class|title|style|align|frameborder|height|longdesc|marginheight|marginwidth|name|scrolling|src|width]";
+return $initArray;
+}
+add_filter('tiny_mce_before_init', 'add_iframe');
+
+/*-------------------------------------------*/
+/*	metaタグからwordpressの情報を削除
+/*-------------------------------------------*/
+remove_action('wp_head', 'wp_generator');
+
+
+/*-------------------------------------------*/
 /*	画像挿入時のwidthとheight指定削除
 /*	（スマホ表示の際に画像サイズ自動調整がうまくいかない為）
+/*	→　キャプションが入らなくなる為削除。サイズは!importantで調整
 /*-------------------------------------------*/
+/*
 function remove_hwstring_from_image_tag( $html, $id, $caption, $title, $align, $url, $size ) {
     list( $img_src, $width, $height ) = image_downsize($id, $size);
     $hwstring = image_hwstring( $width, $height );
@@ -654,7 +600,7 @@ function remove_hwstring_from_image_tag( $html, $id, $caption, $title, $align, $
     return $html;
 }
 add_filter( 'image_send_to_editor', 'remove_hwstring_from_image_tag', 10, 7 );
-
+*/
 
 /*-------------------------------------------*/
 /*	Comment
@@ -681,7 +627,7 @@ function biz_vektor_comment( $comment, $args, $depth ) {
 		</div><!-- .comment-meta .commentmetadata -->
 
 		<div class="comment-body"><?php comment_text(); ?></div>
-		<div class="sBtn">
+		<div class="linkBtn linkBtnS">
 		<?php comment_reply_link( array_merge( $args, array( 'reply_text' => '返信', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 		</div><!-- .reply -->
 	</div><!-- #comment-##  -->
@@ -692,7 +638,7 @@ function biz_vektor_comment( $comment, $args, $depth ) {
 		case 'trackback' :
 	?>
 	<li class="post pingback">
-		<p>Pingback: <?php comment_author_link(); ?>  <?php edit_comment_link( 'Edit', '<span class="edit-link">(', ')</span>' ); ?>
+		<p>Pingback: <?php comment_author_link(); ?>  <span class="linkBtn linkBtnS"><?php edit_comment_link( '編集', '<span class="edit-link">(', ')</span>' ); ?></span>
 	<?php
 			break;
 	endswitch;
@@ -711,7 +657,53 @@ function biz_vektor_content_nav( $nav_id ) {
 			<div class="nav-next"><?php previous_posts_link('新しい投稿 <span class="meta-nav">&rarr;</span>'); ?></div>
 		</div><!-- #nav -->
 	<?php endif;
-} 
+	wp_reset_query();
+}
+
+/*-------------------------------------------*/
+/*	ページング
+/*-------------------------------------------*/
+function pagination($pages = '', $range = 1) {
+     $showitems = ($range * 2)+1;  
+ 
+     global $paged;
+     if(empty($paged)) $paged = 1;
+ 
+     if($pages == '') {
+         global $wp_query;
+         $pages = $wp_query->max_num_pages;
+         if(!$pages) {
+             $pages = 1;
+         }
+     }   
+ 
+     if(1 != $pages) {
+         echo "<div class=\"paging\"><span class=\"pageIndex\">Page ".$paged." / ".$pages."</span>";
+         if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo;</a>";
+         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo;</a>";
+ 
+         for ($i=1; $i <= $pages; $i++) {
+             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )) {
+                 echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a>";
+             }
+         }
+ 
+         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged + 1)."\">&rsaquo;</a>";
+         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>&raquo;</a>";
+         echo "</div>\n";
+     }
+}
+// ▲ページング
+
+
+
+
+
+/*-------------------------------------------*/
+/*	wp_head が吐き出す余分な項目を削除
+/*-------------------------------------------*/
+// prev,next
+remove_action('wp_head','adjacent_posts_rel_link_wp_head',10);
 
 /*-------------------------------------------*/
 /*	Comment out short code

@@ -158,7 +158,30 @@ window.onload = function(){
 
 
 
-// rollover.js
+
+
+// window open
+function m_win(url,windowname,width,height) {
+ var features="location=no, menubar=no, status=yes, scrollbars=yes, resizable=yes, toolbar=no";
+ if (width) {
+  if (window.screen.width > width)
+   features+=", left="+(window.screen.width-width)/2;
+  else width=window.screen.width;
+  features+=", width="+width;
+ }
+ if (height) {
+  if (window.screen.height > height)
+   features+=", top="+(window.screen.height-height)/2;
+  else height=window.screen.height;
+  features+=", height="+height;
+ }
+ window.open(url,windowname,features);
+}
+
+
+/*-------------------------------------------*/
+/*	rollover.js
+/*-------------------------------------------*/
 var initRollovers = window.onload;
 window.onload = function(){
 	if (!document.getElementById) return
@@ -201,30 +224,10 @@ window.onload = function(){
 	}
 }
 
-
-
-// window open
-function m_win(url,windowname,width,height) {
- var features="location=no, menubar=no, status=yes, scrollbars=yes, resizable=yes, toolbar=no";
- if (width) {
-  if (window.screen.width > width)
-   features+=", left="+(window.screen.width-width)/2;
-  else width=window.screen.width;
-  features+=", width="+width;
- }
- if (height) {
-  if (window.screen.height > height)
-   features+=", top="+(window.screen.height-height)/2;
-  else height=window.screen.height;
-  features+=", height="+height;
- }
- window.open(url,windowname,features);
-}
-
  
-/*-------------------------------------
- ページ読み込み中
--------------------------------------*/
+/*-------------------------------------------*/
+/*	ページ内するするスクロール
+/*-------------------------------------------*/
 jQuery(document).ready(function(){
  
     //
@@ -248,3 +251,27 @@ jQuery(document).ready(function(){
 jQuery.easing.quart = function (x, t, b, c, d) {
     return -c * ((t=t/d-1)*t*t*t - 1) + b;
 };
+
+
+/*-------------------------------------------*/
+/*	メニューの開閉
+/*-------------------------------------------*/
+function showHide(targetID) { 
+	if( document.getElementById(targetID)) { 
+		if( document.getElementById(targetID).className == "itemOpen") {
+			document.getElementById(targetID).className = "itemClose";
+		} else { 
+			document.getElementById(targetID).className = "itemOpen";
+		}
+	}
+}
+
+/*-------------------------------------------*/
+/*
+/*-------------------------------------------*/
+jQuery(document).ready(function(){
+	jQuery('body :first-child').addClass('firstChild');
+	jQuery('body :last-child').addClass('lastChild');
+	jQuery('body li:nth-child(odd)').addClass('odd');
+	jQuery('body li:nth-child(even)').addClass('even');
+});

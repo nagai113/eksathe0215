@@ -23,9 +23,8 @@
 		<?php endwhile; ?>
 		</ul>
 	<?php } ?>
-
-	</div>
-	<?php biz_vektor_content_nav( 'nav-below' ); ?>
+	</div><!-- [ /.infoList ] -->
+	<?php pagination($additional_loop->max_num_pages); ?>
 	</div><!-- #content -->
 
 <!-- [ #sideTower ] -->

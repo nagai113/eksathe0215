@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" <?php language_attributes(); ?>>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="edge" />
+<![endif]-->
+<html xmlns:fb="http://ogp.me/ns/fb#" <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=320, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=1.0, ">
+<meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
 <title><?php getHeadTitle(); ?></title>
 <meta name="description" content="<?php getHeadDescription(); ?>" />
-<meta name="keywords" content="<?php biz_vektor_getHeadKeywords(); //•∆©`•ﬁ•™•◊•∑•Á•Û§«BizVektorÃÿ”–§ŒÇé£®π≤Õ®•≠©`•Ô©`•…£©§Ú π”√?>" />
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans:700|Lato:900|Anton' rel='stylesheet' type='text/css'>
+<meta name="keywords" content="<?php biz_vektor_getHeadKeywords(); ?>" />
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:700|Lato:900|Anton' rel='stylesheet' type='text/css' />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="start" href="<?php echo site_url(); ?>" title="•€©`•‡" />
+<link rel="start" href="<?php echo site_url(); ?>" title="„Éõ„Éº„É†" />
 <?php biz_vektor_ogp(); ?>
 <?php biz_vektor_theme_style(); ?>
-<?php biz_vektor_gMenuDivide(); ?>
-<script type="text/javascript">
-function inFacebookPageCheck()	{
-	if( top.location != this.location ){
-		document.getElementById("wrap").className = "inFacebook";
+<?php
+if (is_front_page()) {
+	// ‚ñº„Çπ„É©„Ç§„Éâ„Ç∑„Éß„Éº„Åå„ÅÇ„ÇãÂ†¥Âêà
+	if (biz_vektor_slideExist()) {
+	echo '<link rel="stylesheet" href="'.get_template_directory_uri().'/js/FlexSlider/flexslider.css" type="text/css">';
+	wp_enqueue_script( 'jquery' );
+	wp_register_script( 'flexSlider' , get_template_directory_uri().'/js/FlexSlider/jquery.flexslider.js', array('jquery'), '20120609');
+	wp_enqueue_script( 'flexSlider' );
 	}
-}
-window.onload = inFacebookPageCheck;
-</script>
-
+} ?>
 
 <?php
+wp_register_script( 'masterjs', get_template_directory_uri().'/js/master.js', array('jquery'), '20120610' );
+wp_register_script( 'flatheights' , get_template_directory_uri().'/js/jquery.flatheights.js', array('jquery'), '20120622');
+wp_register_script( 'footerFixed' , get_template_directory_uri().'/js/footerFixed.js', array('jquery'), '20120622');
+wp_enqueue_script( 'jquery' );
+wp_enqueue_script( 'masterjs' );
+wp_enqueue_script( 'footerFixed' );
+wp_enqueue_script( 'flatheights' );
+
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
 	 */
@@ -36,25 +47,8 @@ window.onload = inFacebookPageCheck;
 	 */
 	wp_head();
 ?>
-<?php if (is_front_page()) { ?>
-
-<?php // ®ã•π•È•§•…•∑•Á©`§¨§¢§Îàˆ∫œ ?>
-<?php if (biz_vektor_slideExist()) { ?>
-
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/js/FlexSlider/flexslider.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/FlexSlider/jquery.flexslider.js"></script>
-
-<script type="text/javascript" charset="utf-8">
-  jQuery(window).load(function() {
-    jQuery('.flexslider').flexslider();
-  });
-</script>
-
-<?php } ?>
-<?php } ?>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/master.js"></script>
-
+<?php biz_vektor_theme_styleOldIe(); ?>
+<?php biz_vektor_gMenuDivide(); ?>
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <?php biz_vektor_googleAnalytics(); ?>
 </head>
@@ -68,11 +62,17 @@ window.onload = inFacebookPageCheck;
   js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=<?php biz_vektor_fbAppId(); ?>";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div id="wrap">
 <?php
 if ( is_user_logged_in() == TRUE ) { ?>
 <?php get_template_part('module_adminHeader'); ?>
 <?php } ?>
+<div id="wrap">
+<!-- [ #headerTop ] -->
+<div id="headerTop">
+<div class="innerBox">
+<div id="site-description"><?php bloginfo( 'description' ); ?></div>
+</div>
+</div><!-- [ /#headerTop ] -->
 
 <!-- [ #header ] -->
 <div id="header">
@@ -96,65 +96,54 @@ if ( is_user_logged_in() == TRUE ) { ?>
 </div>
 <!-- [ /#header ] -->
 
+
+<?php
+$gMenuExist = wp_nav_menu( array( 'theme_location' => 'Header' , 'fallback_cb' => '' , 'echo' => false ) ) ;
+if ($gMenuExist) { ?>
 <!-- [ #gMenu ] -->
-<div id="gMenu" class="menuClose" onMouseOver="this.className='menuOpen'" onMouseOut="this.className='menuClose'">
+<div id="gMenu" class="itemClose" onclick="showHide('gMenu');">
 <div id="gMenuInner" class="innerBox">
 <h3 class="assistive-text"><span>MENU</span></h3>
-<div class="skip-link screen-reader-text"><a href="#content" title="•·•À•Â©`§ÚÔw§–§π">•·•À•Â©`§ÚÔw§–§π</a></div>
-
+<div class="skip-link screen-reader-text"><a href="#content" title="„É°„Éã„É•„Éº„ÇíÈ£õ„Å∞„Åô">„É°„Éã„É•„Éº„ÇíÈ£õ„Å∞„Åô</a></div>
 <?php wp_nav_menu( array(
  'theme_location' => 'Header',
- 'container' => 'ul',
- //'menu_class' => 'nav',
- 'echo' => true,
- //'before' => '',
- //'after' => '',
- //'link_before' => '',
- //'link_after' => '',
- //'depth' => 0,
- 'walker' => new description_walker())
- ); ?>
+ 'fallback_cb' => '',
+ 'walker' => new description_walker()
+));
+?>
 </div><!-- [ /#gMenuInner ] -->
 </div>
 <!-- [ /#gMenu ] -->
-
+<?php } ?>
 
 <?php if (!is_front_page()) { ?>
 <div id="pageTitBnr">
 <div class="innerBox">
-<div id="pageTitInner" >
-	
-	<?php if (get_post_type() === 'info' && (is_category() || is_single() || is_archive() || is_home())) { ?>
-	<div id="pageTit">§™÷™§È§ª</div>
-	<?php } elseif ( is_attachment() ) { ?>
-	<div id="pageTit"><?php the_title(); ?></div>
-	<?php /* ®ã•´•∆•¥•Í©`•⁄©`•∏ || Õ∂∏Â”õ ¬ || •¢©`•´•§•÷ || Õ∂∏Â§Œ•»•√•◊•⁄©`•∏ */ ?>
-	<?php } else if (is_category() || is_single() || is_archive() || is_home()) { ?>
-	<div id="pageTit">•÷•Ì•∞</div>
-	<?php /* ®ãÖg“ª•⁄©`•∏ */ ?>
-	<?php } else if (is_page()) { ?>
-	<h1 id="pageTit"><?php the_title(); ?> <?php edit_post_link('æéºØ', '<span class="edit-link">£®', '£©' ); ?></h1>
-	<?php /* ®ã•ø•∞•¢©`•´•§•÷ */ ?>
-	<?php } else if (is_tag()) { ?>
-	<h1 id="pageTit">•ø•∞Ñe•¢©`•´•§•÷£∫<?php single_tag_title();?></h1>
-	<?php /* ®ãó À˜ΩYπ˚ */ ?>
-	<?php } else if (is_search()) { ?>
-	<h1 id="pageTit">°∫<?php echo get_search_query(); ?>°ª§Œó À˜ΩYπ˚</h1>
-	<?php /* ®ã§Ω§Ï“‘Õ‚ */ ?>
-	<?php } else { ?>
-	<h1 id="pageTit">•⁄©`•∏§¨“ä§ƒ§´§Í§ﬁ§ª§Û</h1>
-	<?php /* °¯§Ω§Ï“‘Õ‚ */ ?>
-<?php } ?>
+<div id="pageTitInner">
+<?php get_template_part('module_pageTit'); ?>
 </div><!-- [ /#pageTitInner ] -->
 </div>
 </div><!-- [ /#pageTitBnr ] -->
-<?php } ?>
-
 <!-- [ #panList ] -->
 <div id="panList">
 <div id="panListInner" class="innerBox">
-<?php get_panList(); ?>
+<?php get_template_part('module_panList'); ?>
 </div>
 </div>
 <!-- [ /#panList ] -->
+<?php } ?>
+
+<?php if (is_front_page() && (biz_vektor_slideExist() || get_header_image()) ) { ?>
+<div id="topMainBnr">
+<div id="topMainBnrFrame" class="flexslider">
+<?php if(biz_vektor_slideExist()) { ?>
+	<ul class="slides">
+	<?php biz_vektor_slideBody(); ?>
+	</ul>
+<?php } else { ?>
+	<div class="slideFrame"><img src="<?php header_image(); ?>" alt="" /></div>
+<?php } ?>
+</div>
+</div>
+<?php } ?>
 <div id="main">

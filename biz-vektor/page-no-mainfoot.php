@@ -1,4 +1,9 @@
-<?php /* Template Name: ページ下部問い合わせなし */ get_header(); ?>
+<?php
+/*
+ * Template Name: ページ下部問い合わせなし
+ */
+get_header(); ?>
+
 <!-- [ #container ] -->
 <div id="container" class="innerBox">
 	<!-- [ #content ] -->
@@ -11,7 +16,7 @@
 <?php
 if ( is_user_logged_in() == TRUE ) {　?>
 <div class="adminEdit">
-<span class="mBtn"><?php edit_post_link('編集', '<span class="edit-link">', '</span>' ); ?></span>
+<span class="linkBtn linkBtnS linkBtnAdmin"><?php edit_post_link('編集'); ?></span>
 </div>
 <?php } ?>
 <?php endwhile; ?>
@@ -57,7 +62,7 @@ if ( is_user_logged_in() == TRUE ) {　?>
 	if ($post_id) {
 		$children = wp_list_pages("title_li=&child_of=".$post_id."&echo=0");
 		if ($children) { ?>
-		<div class="localSection sideWidget">
+		<div class="localSection sideWidget pageListSection">
 		<h3 class="localHead"><a href="<?php echo get_permalink($post_id); ?>"><?php echo get_the_title($post_id); ?></a></h3>
 		<ul class="localNavi">
 		<?php echo $children; ?>

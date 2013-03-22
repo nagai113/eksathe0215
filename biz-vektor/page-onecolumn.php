@@ -1,9 +1,13 @@
-<?php /* Template Name: サイドバーなし */ get_header(); ?>
+<?php
+/*
+ * Template Name: サイドバーなし
+ */
+get_header(); ?>
 
 <!-- [ #container ] -->
 <div id="container" class="innerBox">
-	<!-- [ #content ] -->
-	<div id="content" class="wide">
+<!-- [ #content ] -->
+<div id="content" class="wide">
 	<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 	<div id="post-<?php the_ID(); ?>" class="entry-content">
 		<?php the_content(); ?>
@@ -13,7 +17,7 @@
 <?php
 if ( is_user_logged_in() == TRUE ) {　?>
 <div class="adminEdit">
-<span class="mBtn"><?php edit_post_link('編集', '<span class="edit-link">', '</span>' ); ?></span>
+<span class="linkBtn linkBtnS linkBtnAdmin"><?php edit_post_link('編集'); ?></span>
 </div>
 <?php } ?>
 
@@ -21,8 +25,8 @@ if ( is_user_logged_in() == TRUE ) {　?>
 <?php biz_vektor_fbComments(); ?>
 
 	<?php endwhile; ?>
-	</div>
-	<!-- [ /#content ] -->
+</div>
+<!-- [ /#content ] -->
 </div>
 <!-- [ /#container ] -->
 

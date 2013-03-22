@@ -6,7 +6,6 @@
 	<div id="content">
 	<h2><?php printf( get_the_date('Y') ); ?>年のお知らせ</h2>
 	<div class="infoList">
-
 	<?php
 	$options = biz_vektor_get_theme_options();
 	if ( $options['listInfoArchive'] == 'listType_set' ) { ?>
@@ -20,9 +19,8 @@
 		<?php endwhile; ?>
 		</ul>
 	<?php } ?>
-
-	</div>
-	<?php biz_vektor_content_nav( 'nav-below' ); ?>
+	</div><!-- [ /.infoList ] -->
+	<?php pagination($additional_loop->max_num_pages); ?>
 	</div>
 	<!-- [ /#content ] -->
 

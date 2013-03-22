@@ -17,8 +17,8 @@
 	} else {
 		get_template_part('module_loop_blog2');
 	} ?>
-	</div>
-	<?php biz_vektor_content_nav( 'nav-below' ); ?>
+	</div><!-- [ /.infoList ] -->
+	<?php pagination($additional_loop->max_num_pages); ?>
 	</div><!-- #content -->
 
 <!-- [ #sideTower ] -->
