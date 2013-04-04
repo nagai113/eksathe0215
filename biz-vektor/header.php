@@ -68,8 +68,7 @@ if ( is_user_logged_in() == TRUE ) { ?>
 <?php } ?>
 <div id="wrap">
 <!-- [ #headerTop ] -->
-<div id="headerTop">
-</div><!-- [ /#headerTop ] -->
+
 
 <!-- [ #header ] -->
 <div id="header">
