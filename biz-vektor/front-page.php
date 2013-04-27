@@ -56,7 +56,7 @@ if ($postCount) :
 ?>
 <div id="topInfo" class="infoList">
 <h2>お知らせ</h2>
-<div class="rssBtn"><a href="<?php echo home_url(); ?>/feed/?post_type=info" id="infoRss" target="_blank">RSS</a></div>
+<!--<div class="rssBtn"><a href="<?php echo home_url(); ?>/feed/?post_type=info" id="infoRss" target="_blank">RSS</a></div>-->
 <?php
 $options = biz_vektor_get_theme_options();
 if ( $options['listInfoTop'] == 'listType_set' ) { ?>
@@ -77,7 +77,7 @@ if ( $options['listInfoTop'] == 'listType_set' ) { ?>
 <?php if(have_posts()): ?>
 <div id="topBlog" class="infoList">
 <h2><?php echo esc_html(bizVektorOptions('postLabelName')); ?></h2>
-<div class="rssBtn"><a href="<?php echo home_url(); ?>/feed/?post_type=post" id="blogRss" target="_blank">RSS</a></div>
+<!--<div class="rssBtn"><a href="<?php echo home_url(); ?>/feed/?post_type=post" id="blogRss" target="_blank">RSS</a></div>-->
 <?php
 $options = biz_vektor_get_theme_options();
 if ( $options['listBlogTop'] == 'listType_set' ) {
