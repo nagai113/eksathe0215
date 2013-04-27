@@ -30,12 +30,12 @@ form#searchform input#searchsubmit,
 #gMenu .menu li.current_page_item a,
 #gMenu .menu li.current_page_ancestor a ,
 #gMenu .menu li.current-page-ancestor a ,
-#gMenu .menu li a:hover	{ background-color:#006851; border-right:1px solid #004B00;
-background: -webkit-gradient(linear, 0 0, 0 bottom, from(#006851), to(#004B00));
-background: -moz-linear-gradient(#006851, #004B00);
-background: linear-gradient(#006851, #004B00);
--ms-filter: "progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#006851, EndColorStr=#004B00)";
--pie-background: linear-gradient(#006851, #004B00);
+#gMenu .menu li a:hover	{ background-color:#006851; border-right:1px solid #006851;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(#006851), to(#006851));
+background: -moz-linear-gradient(#006851, #006851);
+background: linear-gradient(#006851, #006851);
+-ms-filter: "progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#006851, EndColorStr=#006851)";
+-pie-background: linear-gradient(#006851, #006851);
 behavior: url(/wp-content/themes/biz-vektor/PIE.htc);
 }
 #gMenu .menu li.current_page_item a span,
@@ -72,7 +72,7 @@ behavior: url(/wp-content/themes/biz-vektor/PIE.htc);
 #sideTower .sideWidget h4	{ border-left-color:#006851; }
 
 #pagetop a	{ background-color:#006851; }
-#footMenu	{ background-color:#006851;border-top-color:#004B00; }
+#footMenu	{ background-color:#006851;border-top-color:#006851; }
 
 #topMainBnr	{ background-color:#006851; }
 
