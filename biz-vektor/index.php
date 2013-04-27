@@ -8,7 +8,6 @@ if (isset($_GET['s']) && empty($_GET['s'])) {
 
 <!-- [ #container ] -->
 <div id="container" class="innerBox">
-	<!-- [ #content ] -->
 	<div id="content">
 
 <?php if (is_home()) { ?>
@@ -31,6 +30,8 @@ if ( $options['listBlogArchive'] == 'listType_set' ) {
 // ▲トップページではない場合（基本的に表示される事は無いはず）
 } ?>
 	</div>
+	
+	<!-- [ #content ] -->
 	<!-- [ /#content ] -->
 	
 <!-- [ #sideTower ] -->

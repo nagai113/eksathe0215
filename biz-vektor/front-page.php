@@ -73,20 +73,7 @@ if ( $options['listInfoTop'] == 'listType_set' ) { ?>
 </div><!-- [ /#topInfo ] -->
 <?php endif;?>
 
-<?php query_posts("showposts=5"); ?>
-<?php if(have_posts()): ?>
-<div id="topBlog" class="infoList">
-<h2><?php echo esc_html(bizVektorOptions('postLabelName')); ?></h2>
-<!--<div class="rssBtn"><a href="<?php echo home_url(); ?>/feed/?post_type=post" id="blogRss" target="_blank">RSS</a></div>-->
-<?php
-$options = biz_vektor_get_theme_options();
-if ( $options['listBlogTop'] == 'listType_set' ) {
-	get_template_part('module_loop_blog2');
-} else {
-	get_template_part('module_loop_blog');
-} ?>
-</div><!-- [ /#topBlog ] -->
-<?php endif;?>
+
 <?php wp_reset_query(); ?>
 
 <?php biz_vektor_blogList() // 外部ブログ新着インポート ?>
