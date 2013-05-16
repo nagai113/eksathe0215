@@ -55,7 +55,7 @@ endwhile;
 if ($postCount) :
 ?>
 <div id="topInfo" class="infoList">
-<h2>お知らせ</h2>
+<h2>News</h2>
 <!--<div class="rssBtn"><a href="<?php echo home_url(); ?>/feed/?post_type=info" id="infoRss" target="_blank">RSS</a></div>-->
 <?php
 $options = biz_vektor_get_theme_options();
