@@ -1,4 +1,4 @@
-<?php $taxo_catelist = get_the_term_list( $post->ID,'info-cat','','',''); ?>
+<?php $taxo_catelist = get_the_term_list( $post->ID,'category','','',''); ?>
 <li>
 <span class="infoDate"><?php echo esc_html( get_the_date() ); ?></span>
 <span class="infoCate"><?php echo $taxo_catelist; ?></span>
