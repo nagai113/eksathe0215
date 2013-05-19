@@ -48,7 +48,7 @@ get_currentuserinfo(); ?>
 
 <?php if ( function_exists( 'biz_vektor_topSpecial' ) ): biz_vektor_topSpecial(); endif; ?>
 
-<?php $loop = new WP_Query( array( 'post_type' => 'info', 'posts_per_page' => 10 ) ); ?>
+<?php $loop = new WP_Query( array( 'post_type' => 'post', 'posts_per_page' => 10 ) ); ?>
 <?php while ( $loop->have_posts() ) : $loop->the_post();
 $postCount = ++$postCount;
 endwhile;
